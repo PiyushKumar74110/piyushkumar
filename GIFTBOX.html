@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .maingift
+        {
+            display:flex;
+            justify-content: center;
+            align-items:center;
+            min-height:100vh;
+            background-color:black;
+            overflow:hidden;
+            font-family:sans-serif;
+        }
+
+        .giftcontainer
+        {
+            position:absolute;
+        }
+
+        .giftcontainer::before
+        {
+            content:'';
+            position:absolute;
+            width:170px;
+            height:20px;
+            background-color: rgb(0,0,0,0.4);
+            border-radius:50%;
+            top:90px;
+            left:-10px;
+        }
+
+        .gift{
+            position:absolute;
+            width:150px;
+            height:100px;
+            background-color:cyan;
+        }
+
+        .gift::before
+        {
+            content:'';
+            position:absolute;
+            width:25px;
+            height:100px;
+            background-color: red;
+            left:62px;
+        }
+
+
+        .gift::after
+        {
+            content:'';
+            position:absolute;
+            box-shadow:inset 0 10px rgba(0,0,0,0.5);
+            width:150px;
+            height:100px;
+        }
+
+        #click
+        {
+            display:none;
+        }
+
+        .click
+        {
+            position:absolute;
+            background-color:cyan;
+            width:170px;
+            height:40px;
+            top:-40px;
+            left:-10px;
+            transform-origin:bottom left;
+            transition:0.3s;
+        }
+
+        .click::before
+        {
+position:absolute;
+content:'';
+width:25px;
+height:40px;
+background-color:red;
+left:72px;
+        }
+
+        .click::after
+        {
+            content:'';
+            position:absolute;
+
+            width:5px;
+            height:0;
+            border-bottom:30px solid red;
+            border-top:30px solid red;
+            border-left:0px solid transparent;
+            border-right:30px solid transparent;
+            transform:rotate(-90deg);
+            left:65px;
+            top:-47px;
+        }
+
+        #click:checked+.click{
+            transform:rotate(-110deg) scale(0.85);
+        }
+
+        #click:checked~.wishes{
+            transform:translateY(-120px);
+            z-index:2;
+        }
+
+        .wishes
+        {
+            position:absolute;
+            transition:.5s;
+            color:#333;
+            font-size:30px;
+            text-align:center;
+            z-index:-1;
+            left:2px;
+            color:#fff;
+            text-shadow:0 0  10px #020202;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        .confetti-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            animation: confetti-fall 3s linear infinite;
+        }
+
+        @keyframes confetti-fall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="maingift">
+        <div class="confetti-container" id="confetti-container"></div>
+<div class="giftcontainer">
+    <div class="gift">
+<input type="checkbox" id="click">
+<label for="click" class="click"></label>
+<div class="wishes">XYZ</div>
+    </div>
+</div>
+    </div>
+</body>
+<script>
+    function createConfetti() {
+            const container = document.getElementById('confetti-container');
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = `${Math.random() * 100}vw`;
+                confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 70%)`;
+                confetti.style.animationDelay =` ${Math.random() * 3}s`;
+                container.appendChild(confetti);
+            }
+        }
+
+let click=document.querySelector('.click');
+let wishes=document.querySelector('.wishes');
+click.addEventListener("click",()=>
+{
+    createConfetti();
+
+});
+
+</script>
+</html>
